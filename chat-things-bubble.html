@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Prueba</title>
+</head>
+    <body>
+
+        <h1 style="font-family: 'helvetica'; text-align:center">Esta es una burbuja de Chat-Thing</h1>
+
+
+        <script src="https://chatthing.ai/chat-widget.js" type="text/javascript" id="b800abab-15ea-47a0-a261-ea16b827e4c4" async defer></script>
+
+        <script>
+
+        // Estilos CSS para la burbuja
+        const bubbleStyles = `
+        .greeting-bubble {
+          position: absolute;
+          right: 50px;
+          bottom: 75px;
+          background: #000000;
+          color: white;
+          font-family: Helvetica;
+          padding: 15px; 
+          border-radius: 30px;
+          transform: translateX(-5%);
+          box-shadow: 0 1px 10px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 24%);
+          animation: slideUp 1.5s ease;
+        }
+          @keyframes slideDown {
+            0% {
+                transform: translate(-50%, -40px);
+            }
+            100% {
+                transform: translate(-50%, 0);
+            }
+            }
+        `;
+        // Agregamos los estilos 
+        const style = document.createElement('style');
+        style.textContent = bubbleStyles;
+        document.head.appendChild(style);
+
+        //Llamamos al padre
+
+        // Creamos la burbuja
+        const bubble = document.createElement('div');
+        bubble.classList.add('greeting-bubble');
+        bubble.innerText = '¡Hola! Soy tu asistente, Hablamos?';
+        bubble.style.display = 'none';
+
+        // Tiempo para que aparezca
+
+        setTimeout(() => {
+          bubble.style.display = 'block';
+        }, 3000);
+
+        //tiempo para que desaparezca
+
+        setTimeout(() =>{
+          bubble.style.display = 'none';
+        }, 20000);
+
+        // Hover mousse, sale burbuja
+
+        function hideBubble() {
+          
+          bubble.style.display = 'none';
+          
+        }
+
+        bubble.addEventListener("mouseleave", hideBubble);
+
+             
+        // Agregamos la burbuja al body
+       
+        document.body.appendChild(bubble);
+
+        </script>
+
+    </body>
+</html>

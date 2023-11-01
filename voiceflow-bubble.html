@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Prueba</title>
+</head>
+<body>
+
+    <h1 style="font-family: 'helvetica'; text-align:center">Esta es una burbuja para VoiceFlow</h1>
+    
+    
+    <script type="text/javascript">
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+              window.voiceflow.chat.load({
+                verify: { projectID: '652029cf228c89000723d289' },
+                url: 'https://general-runtime.voiceflow.com',
+                versionID: 'production'
+              }); 
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+            v.type = "text/javascript"; 
+            s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+
+        // Estilos CSS para la burbuja
+        const bubbleStyles = `
+        .greeting-bubble {
+        background: #F12E2E; 
+        border-radius: 50px;
+        color: white;
+        padding: 10px 16px;
+        font-size: 16px;
+        font-family: monospace;
+        position: absolute;
+        top: -40px;
+        left: -30%;
+        transform: translateX(-50%);
+        box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+        animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideDown {
+        0% {
+            transform: translate(-50%, -40px);
+        }
+        100% {
+            transform: translate(-50%, 0);
+        }
+        }
+        `;
+
+        async function runCode() {
+
+            // Importamos los estilos de la bubuja
+
+            const style = document.createElement('style');
+            style.textContent = bubbleStyles;
+            document.head.append(style);
+
+            if (window.innerWidth >= 1024) {
+          
+              // No necesitamos chequear sessionStorage
+          
+              let element = document.querySelector(".vfrc-launcher");
+
+              /// Mientras el elemento no exita
+              
+              while (!element) {
+                element = document.querySelector(".vfrc-launcher");
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Tiempo que espera para aparecer
+              }
+          
+              // En lugar de hacer click para abrir el chat
+              // Crear y mostrar una burbuja con el texto
+          
+              const bubble = document.createElement('div');
+              bubble.classList.add('greeting-bubble');
+              bubble.innerText = 'Help?';
+
+              function hideBubble() {
+          
+                bubble.style.display = 'none';
+                
+              }
+      
+              bubble.addEventListener("mouseleave", hideBubble);
+             
+          
+              element.parentNode.appendChild(bubble);
+          
+              // Mostrar la burbuja por unos segundos
+              await new Promise(resolve => setTimeout(resolve, 10000)); // Tiempo que espera para desaparecer
+              bubble.remove();
+          
+            }
+          
+          }
+          
+          runCode();
+
+      </script>
+
+
+    </body>
+</html>
