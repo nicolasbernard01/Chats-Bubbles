@@ -15,9 +15,10 @@
         <script>
 
         // Estilos CSS para la burbuja
+        // Estilos CSS para la burbuja
         const bubbleStyles = `
         .greeting-bubble {
-          position: absolute;
+          position: fixed;
           right: 50px;
           bottom: 75px;
           background: #000000;
@@ -42,41 +43,53 @@
         const style = document.createElement('style');
         style.textContent = bubbleStyles;
         document.head.appendChild(style);
-
+        
         //Llamamos al padre
-
+        
         // Creamos la burbuja
         const bubble = document.createElement('div');
         bubble.classList.add('greeting-bubble');
         bubble.innerText = '¡Hola! Soy tu asistente, Hablamos?';
         bubble.style.display = 'none';
-
+        
+        // Update Position
+        
+        function updateBubblePosition() {
+          const scrollY = window.scrollY;
+          const bubbleMov = document.querySelector('.greeting-bubble');
+          bubbleMov.style.top(scrollY + window.innerHeight - 100) + 'px';
+        }
+        
         // Tiempo para que aparezca
-
+        
         setTimeout(() => {
           bubble.style.display = 'block';
+          updateBubblePosition()
         }, 3000);
-
+        
         //tiempo para que desaparezca
-
+        
         setTimeout(() =>{
           bubble.style.display = 'none';
         }, 20000);
-
-        // Hover mousse, sale burbuja
-
+        
+        // mousseleave, burbuja desaparece
+        
         function hideBubble() {
           
           bubble.style.display = 'none';
           
         }
-
+        
         bubble.addEventListener("mouseleave", hideBubble);
-
+        
+        bubble.addEventListener("scroll", updateBubblePosition);
+        
              
         // Agregamos la burbuja al body
-       
+        
         document.body.appendChild(bubble);
+
 
         </script>
 
